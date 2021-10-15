@@ -40,4 +40,18 @@ class Game_Master:
           guess_check = False
 
         return guess_check
+    
+    def change_underscore(self):
+        word = self.word_bank.get_word
+        guess = self.player.ask_letter
+        guess_check = self.check_guess()
+        #word_list, underscore_list = self.word_bank.make_list(word)
+
+        #Check to make sure 
+        if guess_check == True:
+            #update index on underscore list with index from word list from the guess
+            pass
+        #Returns the underscore list for the display
+        
+        #return underscore_list
 

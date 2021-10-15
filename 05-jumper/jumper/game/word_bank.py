@@ -28,3 +28,15 @@ class Word_Bank:
       for i in range(0, len(word)):
          new_word = new_word.replace(word[i], "_ ")
       return new_word
+
+   # def make_list(self, word):
+   #    word_list = []
+   #    underscore_list = []
+
+   #    for let in word:
+   #       word_list.append[let]
+      
+   #    for u in range(len(word_list)):
+   #       underscore_list.append("_")
+      
+   #    return word_list, underscore_list
