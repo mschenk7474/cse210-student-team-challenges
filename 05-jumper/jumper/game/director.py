@@ -29,7 +29,7 @@ class Director:
         self.keep_playing = True
         self.player = Player()
         self.game_master = Game_Master()
-        self.p_man = Parachute_man
+        self.p_man = Parachute_man()
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
