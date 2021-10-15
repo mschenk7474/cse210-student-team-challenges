@@ -11,8 +11,10 @@ class Player:
         Add the letter to the library
         """
         letter = (Player.ask_letter())
+        letter.lower()
         while letter in lib:
             print("That letter was already chosen:")
             letter = (Player.ask_letter())
+            letter.lower()
         lib.append(letter)
         return lib
