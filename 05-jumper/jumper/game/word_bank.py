@@ -20,7 +20,7 @@ class Word_Bank:
 
       return word
 
-   def underscore(self,word):
+   def underscore(self, word):
       """
       This takes the word from the last function and converts it to underscore 
       """

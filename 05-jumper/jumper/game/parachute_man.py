@@ -5,3 +5,15 @@ class Parachute_man:
       self.parachute2 = " \   /\n  \ /\n   0\n  /|\ \n  / \ \n\n^^^^^^^"
       self.parachute3 = "  \ /\n   0\n  /|\ \n  / \ \n\n^^^^^^^"
       self.parachute_dead = "   X\n  /|\ \n  / \ \n\n^^^^^^^"
+
+   def para_display(self, wrong):
+      if wrong == 0:
+         return self.parachute_beg
+      elif wrong == 1:
+         return self.parachute1
+      elif wrong == 2:
+         return self.parachute2
+      elif wrong == 3:
+         return self.parachute3
+      elif wrong == 4:
+         return self.parachute_dead

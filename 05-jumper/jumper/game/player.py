@@ -6,11 +6,10 @@ class Player:
         guess = input("Guess a letter [a-z]: ")
         return guess
     
-    def guess_letter():
+    def guess_letter(self, lib):
         """
         Add the letter to the library
         """
-        lib = []
         letter = (Player.ask_letter())
         while letter in lib:
             print("That letter was already chosen:")
