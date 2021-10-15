@@ -39,9 +39,15 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        
         word = self.word_bank.get_word()
         blank = self.word_bank.underscore(word)
         print(word)
+        #Mason added this.
+        print(self.word_bank.make_list(word))
+       
+        
+
 
         print(blank)
         print(self.p_man.parachute_beg)
@@ -71,6 +77,8 @@ class Director:
         """
         guess, lives = self.game_master.check_guess(self.player_letter, word)
         self.lives = lives
+        #Mason added this 
+        self.game_master.change_underscore()
         
     def do_outputs(self):
         """Outputs the important game information for each round of play. In 
