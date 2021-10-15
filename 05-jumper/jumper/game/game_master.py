@@ -56,5 +56,3 @@ class Game_Master:
         #Returns the underscore list for the display
         
         #return underscore_list
-        
-
