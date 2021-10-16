@@ -53,7 +53,18 @@ class Game_Master:
             pass
           else:
             word_list[i] = word_list[i].replace(word_list[i], "_")
-        return print(word_list)
+        display = (" ".join(word_list))
+        
+        print(display)
+
+        #if (len(display) - display.count(" ") == len(word_list)):
+        if ("_") in display:
+          keep_playing = True
+        else:
+          print("You win!!")
+          keep_playing = False
+        
+        return keep_playing
 
         
         
