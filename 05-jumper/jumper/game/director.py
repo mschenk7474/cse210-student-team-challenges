@@ -42,22 +42,19 @@ class Director:
         
         word = self.word_bank.get_word()
         blank = self.word_bank.underscore(word)
-        print(word)
-        #Mason added this.
-        print(self.word_bank.make_list(word))
        
-        
-
-
         print(blank)
         print(self.p_man.parachute_beg)
 
-        while self.lives != 4:
+        while self.lives != 4 and self.keep_playing:
             self.get_inputs()
-            self.do_updates(word, blank)
+            self.do_updates(word)
             self.do_outputs()
 
-        print("TERMINATED")
+        if self.lives == 4:
+            print("TERMINATED")
+        else:
+            print("You win!!")
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -68,7 +65,7 @@ class Director:
         """
         self.player_letter = self.player.guess_letter(self.player_letter)
 
-    def do_updates(self, word, blank):
+    def do_updates(self, word):
         """Updates the important game information for each round of play. In 
         this case, that means the hider watches the seeker.
 
@@ -77,7 +74,7 @@ class Director:
         """
         guess, lives = self.game_master.check_guess(self.player_letter, word)
         self.lives = lives 
-        self.game_master.change_underscore(self.player_letter, word)
+        self.keep_playing = self.game_master.change_underscore(self.player_letter, word)
         
     def do_outputs(self):
         """Outputs the important game information for each round of play. In 

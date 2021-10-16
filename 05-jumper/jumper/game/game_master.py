@@ -57,11 +57,9 @@ class Game_Master:
         
         print(display)
 
-        #if (len(display) - display.count(" ") == len(word_list)):
         if ("_") in display:
           keep_playing = True
         else:
-          print("You win!!")
           keep_playing = False
         
         return keep_playing
