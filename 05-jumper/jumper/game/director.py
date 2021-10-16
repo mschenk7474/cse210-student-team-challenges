@@ -57,7 +57,7 @@ class Director:
             self.do_updates(word, blank)
             self.do_outputs()
 
-        print("end game")
+        print("TERMINATED")
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -76,9 +76,8 @@ class Director:
             self (Director): An instance of Director.
         """
         guess, lives = self.game_master.check_guess(self.player_letter, word)
-        self.lives = lives
-        #Mason added this 
-        self.game_master.change_underscore()
+        self.lives = lives 
+        self.game_master.change_underscore(self.player_letter, word)
         
     def do_outputs(self):
         """Outputs the important game information for each round of play. In 
