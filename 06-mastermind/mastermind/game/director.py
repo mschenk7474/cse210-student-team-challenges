@@ -1,4 +1,3 @@
-from game.board import Board
 from game.console import Console
 from game.move import Move
 from game.player import Player
@@ -97,3 +96,4 @@ class Director:
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
+main
