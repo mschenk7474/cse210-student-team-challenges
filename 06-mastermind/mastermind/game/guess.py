@@ -16,11 +16,11 @@ class Guess:
             user_guess = int(input("Invalid input!\nWhat is your guess? "))
         self.user_guess = user_guess
 
-    def set_user_key(self, key_num, user_guess):
+    def set_user_key(self, key_num):
         answer_key_list = ["*","*","*","*"]
         #change key number and user guess number into string lists
         key_num_string = str(key_num)
-        user_guess_string = str(user_guess)
+        user_guess_string = str(self.user_guess)
         key_num_list = []
         user_guess_list = []
         for let in key_num_string:
