@@ -9,7 +9,7 @@ class Guess:
 
     #get's the answer number
     def get_random_number(self):
-        randomnum = random.randint(10000, 19999)
+        randomnum = random.randint(1000, 9999)
         random_string = str(randomnum)
         random_string = random_string[1:]
         self.random_num = random_string
