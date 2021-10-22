@@ -7,7 +7,7 @@ class Guess:
         self.end_game = False
 
     #get's the answer number
-    def get_random_number():
+    def get_random_number(self):
         randomnum = random.randint(10000, 19999)
         random_string = str(randomnum)
         random_string = random_string[1:]

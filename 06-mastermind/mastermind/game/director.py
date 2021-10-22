@@ -22,11 +22,12 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._board = Board()
+        self._board = None
         self._console = Console()
         self._keep_playing = True
         self._move = None
         self._roster = Roster()
+        self._guess = Guess()
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -58,14 +59,19 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        
+        p1 = self._roster.players[0]
+        p2 = self._roster.players[1]
+        self._board = Board(p1, p2)
         # display the game board
-        board = self._board.to_string()
-        self._console.write(board)
+        self._board.print()
+        #self._console.write(board)
         # get next player's move
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
         #I made guess a self variable so that we could use it throughout the director class.
-        self.guess = self._console.read_number("What is your guess? ")
+        #self.guess = self._console.read_number("What is your guess? ")
+        self.guess = self._guess.get_user_guess()
         self._console.write(" ")
         turn = Move(self.guess)
         player.set_move(turn)
@@ -79,8 +85,10 @@ class Director:
         """
         #Kept this because both of those are needed, so just add an apply method to board
         player = self._roster.get_current()
-        move = player.get_move()
-        self._board.apply(move)
+        #Get the guess and pass that into get guess
+        guess = player.get_move()
+        secret_code = self._guess.answer_key
+        self._board.update_guess(player, guess, secret_code)
  
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -91,10 +99,9 @@ class Director:
             self (Director): An instance of Director.
         """
         #Changed this to is_done for our solution
-        if self._board.is_done():
+        if self._guess.player_wins():
             winner = self._roster.get_current()
             name = winner.get_name()
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
-main
