@@ -3,24 +3,32 @@ import random
 class Guess:
     def __init__(self):
         self.answer_key = ["*","*","*","*"]
-        self.user_guess = 0000
+        self.user_guess = ""
         self.end_game = False
+        self.random_num = ""
 
+    #get's the answer number
     def get_random_number(self):
-        random_num = random.randint(1000, 9999)
-        return random_num
+        randomnum = random.randint(10000, 19999)
+        random_string = str(randomnum)
+        random_string = random_string[1:]
+        self.random_num = random_string
 
+    #get user guess
     def get_user_guess(self):
-        user_guess = int(input("What is your guess? "))
-        while(user_guess > 9999 or user_guess < 1000):
-            user_guess = int(input("Invalid input!\nWhat is your guess? "))
+        user_guess = input("What is your guess? ")
+        user_int = int(user_guess)
+        while(user_int > 9999 or user_int < 0):
+            user_guess = input("Invalid input!\nWhat is your guess? ")
+            user_int = int(user_guess)
         self.user_guess = user_guess
 
-    def set_user_key(self, key_num):
+    #set the answer key code
+    def set_user_key(self):
         answer_key_list = ["*","*","*","*"]
         #change key number and user guess number into string lists
-        key_num_string = str(key_num)
-        user_guess_string = str(self.user_guess)
+        key_num_string = self.random_num
+        user_guess_string = self.user_guess
         key_num_list = []
         user_guess_list = []
         for let in key_num_string:
@@ -47,6 +55,7 @@ class Guess:
                 answer_key_list[i] = "*"
         self.answer_key = answer_key_list
 
+    #if player is right return true
     def player_wins(self):
         if self.answer_key == ["X","X","X","X"]:
             self.end_game = True
