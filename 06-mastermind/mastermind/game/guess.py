@@ -3,8 +3,7 @@ import random
 class Guess:
     def __init__(self):
         self.answer_key = ["*","*","*","*"]
-        self.user_guess = ""
-        self.end_game = False
+        self.user_guess = "----"
 
     #get's the answer number
     def get_random_number(self):
@@ -16,10 +15,10 @@ class Guess:
     #get user guess
     def get_user_guess(self):
         user_guess = input("What is your guess? ")
-        user_int = int(user_guess)
-        while(user_int > 9999 or user_int < 0):
+        userint = int(user_guess)
+        while(userint > 9999 or userint < 0):
             user_guess = input("Invalid input!\nWhat is your guess? ")
-            user_int = int(user_guess)
+            userint = int(user_guess)
         self.user_guess = user_guess
 
     #set the answer key code
@@ -54,6 +53,8 @@ class Guess:
         self.answer_key = answer_key_list
 
     #if player is right return true
-    def player_wins(self):
+    def keep_playing(self):
         if self.answer_key == ["X","X","X","X"]:
-            self.end_game = True
+            return True
+        else:
+            return False

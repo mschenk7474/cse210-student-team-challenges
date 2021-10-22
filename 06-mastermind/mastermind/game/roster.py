@@ -14,18 +14,19 @@ class Roster:
         Args:
             self (Roster): an instance of Roster.
         """
-        self.current = -1
+        self.current = 0
         self.players = []
         
-    def add_player(self, player):
+    def add_players(self):
         """Adds the given player to the roster
         
         Args:
             self (Roster): An instance of Roster.
             player (Player): The player object to add.
         """
-        if player not in self.players:
-            self.players.append(player)
+        for n in range(2):
+            name = input(f"Enter a name for player {n + 1}: ")
+            self.players.append(name)
 
     def get_current(self):
         """Gets the current player object.
