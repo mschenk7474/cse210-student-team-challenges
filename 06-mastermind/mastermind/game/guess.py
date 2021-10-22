@@ -16,11 +16,12 @@ class Guess:
     #get user guess
     def get_user_guess(self):
         user_guess = input("What is your guess? ")
-        user_int = int(user_guess)
-        while(user_int > 9999 or user_int < 0):
+        userint = int(user_guess)
+        while(userint > 9999 or userint < 0):
             user_guess = input("Invalid input!\nWhat is your guess? ")
-            user_int = int(user_guess)
+            userint = int(user_guess)
         self.user_guess = user_guess
+        return (user_guess)
 
     #set the answer key code
     def set_user_key(self, key_num_string):
@@ -57,3 +58,11 @@ class Guess:
     def player_wins(self):
         if self.answer_key == ["X","X","X","X"]:
             self.end_game = True
+'''       
+guess = Guess()
+randomnum = guess.get_random_number()
+print(randomnum)
+guess.get_user_guess()
+print(guess.user_guess)
+guess.set_user_key(randomnum)
+print(guess.answer_key)'''
