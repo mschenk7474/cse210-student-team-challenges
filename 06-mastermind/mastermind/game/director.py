@@ -3,6 +3,7 @@ from game.move import Move
 from game.player import Player
 from game.roster import Roster
 from game.guess import Guess
+from game.board import Board
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
