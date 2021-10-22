@@ -5,12 +5,14 @@ class Guess:
         self.answer_key = ["*","*","*","*"]
         self.user_guess = ""
         self.end_game = False
+        self._random_string = ""
 
     #get's the answer number
     def get_random_number(self):
         randomnum = random.randint(10000, 19999)
         random_string = str(randomnum)
         random_string = random_string[1:]
+        self._random_string = random_string
         return random_string
 
     #get user guess
@@ -53,11 +55,12 @@ class Guess:
             else:
                 answer_key_list[i] = "*"
         self.answer_key = answer_key_list
+        return (answer_key_list)
 
     #if player is right return true
-    def player_wins(self):
-        if self.answer_key == ["X","X","X","X"]:
-            self.end_game = True
+    def player_wins(self, answer_key):
+        if answer_key == ["X","X","X","X"]:
+            return True
 '''       
 guess = Guess()
 randomnum = guess.get_random_number()

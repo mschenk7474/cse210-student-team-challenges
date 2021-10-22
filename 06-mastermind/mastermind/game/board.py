@@ -13,13 +13,12 @@ class Board:
             self._guess1 = guess
             self._player1 = player
             self._hint1 = hint
-            #print(self._player1, self._guess1, self._hint1)
 
         else:
             self._guess2 = guess
             self._hint2 = hint
-            #print(self._player2, self._guess2, self._hint2)
-
+        self._hint1 = "".join(self._hint1)
+        self._hint2 = "".join(self._hint2)
 
     def print(self):
         print("--------------------")
