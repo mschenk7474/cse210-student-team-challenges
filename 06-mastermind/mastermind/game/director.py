@@ -61,8 +61,10 @@ class Director:
         """
         
         p1 = self._roster.players[0]
+        player_1 = p1.get_name()
         p2 = self._roster.players[1]
-        self._board = Board(p1, p2)
+        player_2 = p2.get_name()
+        self._board = Board(player_1, player_2)
         # display the game board
         self._board.print()
         #self._console.write(board)
