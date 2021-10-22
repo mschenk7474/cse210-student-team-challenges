@@ -5,14 +5,13 @@ class Guess:
         self.answer_key = ["*","*","*","*"]
         self.user_guess = ""
         self.end_game = False
-        self.random_num = ""
 
     #get's the answer number
-    def get_random_number(self):
+    def get_random_number():
         randomnum = random.randint(10000, 19999)
         random_string = str(randomnum)
         random_string = random_string[1:]
-        self.random_num = random_string
+        return random_string
 
     #get user guess
     def get_user_guess(self):
@@ -24,10 +23,9 @@ class Guess:
         self.user_guess = user_guess
 
     #set the answer key code
-    def set_user_key(self):
+    def set_user_key(self, key_num_string):
         answer_key_list = ["*","*","*","*"]
         #change key number and user guess number into string lists
-        key_num_string = self.random_num
         user_guess_string = self.user_guess
         key_num_list = []
         user_guess_list = []
