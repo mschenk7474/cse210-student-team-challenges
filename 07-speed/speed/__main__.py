@@ -1,12 +1,12 @@
+import os
+os.environ['RAYLIB_BIN_PATH'] = r'C:\Users\SchenkKids\Documents\CSE-210-Repos\cse210-student-solo-checkpoints\07-snake\snake\game\raylib-2.0.0-Win64-mingw\raylib-2.0.0-Win64-mingw\lib'
+
 from game.director import Director
 from game.input_service import InputService
 from game.output_service import OutputService
-from asciimatics.screen import Screen 
 
-def main(screen):
-    input_service = InputService(screen)
-    output_service = OutputService(screen)
+def main():
+    input_service = InputService()
+    output_service = OutputService()
     director = Director(input_service, output_service)
     director.start_game()
-
-Screen.wrapper(main)
