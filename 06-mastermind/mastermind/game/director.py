@@ -1,4 +1,3 @@
-from game.console import Console
 from game.roster import Roster
 from game.guess import Guess
 from game.board import Board
@@ -21,7 +20,6 @@ class Director:
             self (Director): an instance of Director.
         """
         self._board = None
-        self._console = Console()
         self._keep_playing = True
         self._roster = Roster()
         self._guess1 = Guess()
