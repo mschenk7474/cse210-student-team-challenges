@@ -129,3 +129,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+07-speed/speed/raylib-2.0.0-Win64-mingw/raylib-2.0.0-Win64-mingw
