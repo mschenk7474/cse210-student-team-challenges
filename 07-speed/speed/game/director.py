@@ -3,6 +3,7 @@ from time import sleep
 import raylibpy
 from game import constants
 from game.score_board import ScoreBoard
+from game.buffer import Buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -30,6 +31,7 @@ class Director:
         self._keep_playing = True
         self._output_service = output_service
         self._score_board = ScoreBoard()
+        self._buffer = Buffer()
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -83,5 +85,6 @@ class Director:
         self._output_service.draw_actor(self._food)
         self._output_service.draw_actors(self._snake.get_all())
         self._output_service.draw_actor(self._score_board)
+        self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
 
