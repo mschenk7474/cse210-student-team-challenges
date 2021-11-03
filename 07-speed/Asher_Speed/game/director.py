@@ -2,7 +2,6 @@ from time import sleep
 
 import raylibpy
 from game import constants
-from game.food import Food
 from game.score_board import ScoreBoard
 from game.snake import Snake
 from game.words import Word
@@ -47,8 +46,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        direction = self._input_service.get_direction()
-        self._snake.turn_head(direction)
+        pass
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -56,8 +54,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._snake.move()
-        self._handle_body_collision()
+        pass
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -67,37 +64,7 @@ class Director:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        self._output_service.draw_actors(self._snake.get_all())
         for i in range(len(self.word)):
             self._output_service.draw_text(self.word[i],raylibpy.BLACK)
         self._output_service.flush_buffer()
 
-    def _handle_body_collision(self):
-        """Handles collisions between the snake's head and body. Stops the game 
-        if there is one.
-        Args:
-            self (Director): An instance of Director.
-        """
-        head = self._snake.get_head()
-        body = self._snake.get_collidable_segments()
-        for segment in body:
-            if head.get_position().equals(segment.get_position()):
-                self._keep_playing = False
-                break
-
-    def _is_collision(self, first, second):
-        x1 = first.get_position().get_x()
-        y1 = first.get_position().get_y()
-        width1 = first.get_width()
-        height1 = first.get_height()
-
-        rectangle1 = raylibpy.Rectangle(x1, y1, width1, height1)
-
-        x2 = second.get_position().get_x()
-        y2 = second.get_position().get_y()
-        width2 = first.get_width()
-        height2 = first.get_height()
-
-        rectangle2 = raylibpy.Rectangle(x2, y2, width2, height2)
-
-        return raylibpy.check_collision_recs(rectangle1, rectangle2)
