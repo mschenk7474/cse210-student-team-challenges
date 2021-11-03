@@ -5,7 +5,7 @@ from game.point import Point
 """
 This class will be for input, mainly the typing of the letters to create the words.
 """
-class Buffer():
+class Buffer(Actor):
    def __init__(self):
       super().__init__()
       self._string= input(" ")
@@ -17,6 +17,6 @@ class Buffer():
    def match(self, word_list):
       for x in word_list:
          if self._string == word_list[x]:
-            return 1
+            return True
          else:
-            return 0
+            return False
