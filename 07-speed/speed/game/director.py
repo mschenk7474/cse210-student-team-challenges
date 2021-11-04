@@ -3,7 +3,9 @@ from time import sleep
 import raylibpy
 from game import constants
 from game.score_board import ScoreBoard
+from game.words import Word
 from game.buffer import Buffer
+from speed.game import buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -32,7 +34,10 @@ class Director:
         self._keep_playing = True
         self._output_service = output_service
         self._score_board = ScoreBoard()
-        self._buffer = None
+        self._buffer_2 = None
+        self._buffer = Buffer()
+        self._word_list = []
+        self._word = Word()
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -55,18 +60,22 @@ class Director:
 
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
-        that means getting the desired direction and moving the snake.
+        that means getting the five words that will be displayed on the screen.
 
         Args:
             self (Director): An instance of Director.
         """
-        self._buffer = Buffer(self._bufferstring)
-        #direction = self._input_service.get_direction()
-        #self._snake.turn_head(direction)
+        self._buffer_2 = Buffer(self._bufferstring)
+        for i in range(4):
+            self._w = self._word.get_word()
+            self._word_list.append(self._w[i])
+        
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
-        this case, that means checking for a collision and updating the score.
+        this case, that means seeing if the word is a match, if the word hits
+        the wall, removing the words from the list, and then adding and subtracting
+        the points.
 
         Args:
             self (Director): An instance of Director.
@@ -78,21 +87,55 @@ class Director:
         
         if bufferbool:
             self._bufferstring = ""
-        #self._snake.move()
-        #self._handle_body_collision()
-        #self._handle_food_collision()
+            
+        #Variable declarations
+        words_to_remove = []
+        add_points_num = 0
+        sub_points_num = 0
+        #If word is match and add points
+        for word in self._word_list:
+            #Word match here
+            if word == self._buffer.match(self._word_list):
+                #Figure out how the addition per letter (1 per letter)
+                for let in word:
+                    let = 1
+                    let += 1
+                    add_points_num = let
+                self._score_board.add_points(add_points_num)
+
+                #Append the word to the remove list
+                words_to_remove.append(word)
+
+        #If word hits wall and sub points
+            if word == self._word.hit_wall(): #New Function
+                #Figure out subtraction per letter (-1 per letter)
+                for let in word:
+                    let = 1
+                    let += 1
+                    let = -(let)
+                    sub_points_num = let
+                self._score_board.sub_points(sub_points_num)
+                #Append the word to the remove list
+                words_to_remove.append(word)
+
+
+        #Remove words
+        for word in range(len(self._word_list)):
+            for words in range(len(words_to_remove)):
+                if word == words:
+                    self._word_list.pop(word)
+
+
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
-        this case, that means checking if there are stones left and declaring 
-        the winner.
+        this case, that means outputting the scoreboard, words, and buffer.
 
         Args:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        #self._output_service.draw_actor(self._food)
-        #self._output_service.draw_actors(self._snake.get_all())
+        self._output_service.draw_actors(self._word.display_all()) #New function that needs to be added
         self._output_service.draw_actor(self._score_board)
         self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
