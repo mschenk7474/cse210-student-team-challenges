@@ -32,3 +32,13 @@ class ScoreBoard(Actor):
         """
         self._points += points
         self.set_text(f"Score: {self._points}")
+
+    def sub_points(self, points):
+        """Subtracts the given points from the running total and updates the text.
+        
+        Args:
+            self (Score): An instance of Score.
+            points (integer): The points to subtract.
+        """
+        self._points -= points
+        self.set_text(f"Score: {self._points}")

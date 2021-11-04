@@ -6,16 +6,22 @@ how many words fly, etc.
 
 import random
 from game.actor import Actor
+from game.point import Point
 
 class Word(Actor):
     def __init__(self):
 
         super().__init__()
-        self._word = ""
-        self._segments = []
+        self._word = "George"
+        position = Point(50, 50)
+        self.set_position(position)
+        velocity = -1
+        self.set_velocity(velocity)
+        self.set_text(f"Word: {self._word}")
+
 
     def get_word(self):
-        with open("/Users/asherhanson/Desktop/CSE250-projects/cse210-student-solo-checkpoints/07-snake/Ash_Snake/game/words.txt", "r") as file:
+        with open("speed\game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         
@@ -32,4 +38,12 @@ class Word(Actor):
         """
         word = self.get_word()
         #word.set_velocity(direction)
+    def hit_wall():
+        """
+        This determines if the word hits the "wall" meaning that it hit 
+        0 on the X-axis.
+
+        Needs to return true or false.
+        """
+        pass
   

@@ -1,11 +1,12 @@
 from time import sleep
+import random
 
 import raylibpy
 from game import constants
 from game.score_board import ScoreBoard
 from game.words import Word
 from game.buffer import Buffer
-from speed.game import buffer
+#from speed.game import buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -35,7 +36,7 @@ class Director:
         self._output_service = output_service
         self._score_board = ScoreBoard()
         self._buffer_2 = None
-        self._buffer = Buffer()
+        self._buffer = Buffer(self._bufferstring)
         self._word_list = []
         self._word = Word()
         
@@ -47,6 +48,11 @@ class Director:
         """
         print("Starting game...")
         self._output_service.open_window("Speed")
+
+        for i in range(0, 5):
+            self._w = self._word.get_word()
+            self._word_list.append(self._w)
+        print(self._word_list)
 
         while self._keep_playing:
             self._get_inputs()
@@ -66,9 +72,8 @@ class Director:
             self (Director): An instance of Director.
         """
         self._buffer_2 = Buffer(self._bufferstring)
-        for i in range(4):
-            self._w = self._word.get_word()
-            self._word_list.append(self._w[i])
+
+        
         
 
     def _do_updates(self):
@@ -80,50 +85,60 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        words = ["cat", "bat", "word"]
 
         self._bufferstring += self._input_service.get_letter()
-        bufferbool = self._buffer.match(words)
-        
+        bufferbool, x = self._buffer_2.match(self._word_list)
+        counting_score = 0
         if bufferbool:
-            self._bufferstring = ""
+            word = self._word_list[x]
+            for let in word:
+                counting_score += 1
+            self._score_board.add_points(counting_score)
+            self._word_list.pop(x)
             
-        #Variable declarations
-        words_to_remove = []
-        add_points_num = 0
-        sub_points_num = 0
-        #If word is match and add points
-        for word in self._word_list:
-            #Word match here
-            if word == self._buffer.match(self._word_list):
-                #Figure out how the addition per letter (1 per letter)
-                for let in word:
-                    let = 1
-                    let += 1
-                    add_points_num = let
-                self._score_board.add_points(add_points_num)
+            self._bufferstring = ""
+        
+        random_range = random.randint(1,1000)
+        if random_range <= 10:
+            self._w = self._word.get_word()
+            self._word_list.append(self._w)
+        print(self._word_list)
+        # #Variable declarations
+        # words_to_remove = []
+        # add_points_num = 0
+        # sub_points_num = 0
+        # #If word is match and add points
+        # for word in self._word_list:
+        #     #Word match here
+        #     if word == self._buffer.match(self._word_list):
+        #         #Figure out how the addition per letter (1 per letter)
+        #         for let in word:
+        #             let = 1
+        #             let += 1
+        #             add_points_num = let
+        #         self._score_board.add_points(add_points_num)
 
-                #Append the word to the remove list
-                words_to_remove.append(word)
+        #         #Append the word to the remove list
+        #         words_to_remove.append(word)
 
-        #If word hits wall and sub points
-            if word == self._word.hit_wall(): #New Function
-                #Figure out subtraction per letter (-1 per letter)
-                for let in word:
-                    let = 1
-                    let += 1
-                    let = -(let)
-                    sub_points_num = let
-                self._score_board.sub_points(sub_points_num)
-                #Append the word to the remove list
-                words_to_remove.append(word)
+        # #If word hits wall and sub points
+        #     if word == self._word.hit_wall(): #New Function
+        #         #Figure out subtraction per letter (-1 per letter)
+        #         for let in word:
+        #             let = 1
+        #             let += 1
+        #             let = -(let)
+        #             sub_points_num = let
+        #         self._score_board.sub_points(sub_points_num)
+        #         #Append the word to the remove list
+        #         words_to_remove.append(word)
 
 
-        #Remove words
-        for word in range(len(self._word_list)):
-            for words in range(len(words_to_remove)):
-                if word == words:
-                    self._word_list.pop(word)
+        # #Remove words
+        # for word in range(len(self._word_list)):
+        #     for words in range(len(words_to_remove)):
+        #         if word == words:
+        #             self._word_list.pop(word)
 
 
         
@@ -135,8 +150,9 @@ class Director:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        self._output_service.draw_actors(self._word.display_all()) #New function that needs to be added
+        #self._output_service.draw_actors(self._word.display_all()) #New function that needs to be added
         self._output_service.draw_actor(self._score_board)
-        self._output_service.draw_actor(self._buffer)
+        self._output_service.draw_actor(self._word)
+        self._output_service.draw_actor(self._buffer_2)
         self._output_service.flush_buffer()
 

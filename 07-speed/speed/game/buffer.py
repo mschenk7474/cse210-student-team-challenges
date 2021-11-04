@@ -25,7 +25,7 @@ class Buffer(Actor):
          x += 1
 
       if is_in_word > 0:
-         return True
+         return True, x - 1
       else:
-         return False
+         return False, x - 1
    #if returns true, the word that's correct is word_list[x-1]
