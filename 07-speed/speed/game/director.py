@@ -27,11 +27,12 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self._bufferstring = ""
         self._input_service = input_service
         self._keep_playing = True
         self._output_service = output_service
         self._score_board = ScoreBoard()
-        self._buffer = Buffer()
+        self._buffer = None
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -40,7 +41,7 @@ class Director:
             self (Director): an instance of Director.
         """
         print("Starting game...")
-        self._output_service.open_window("Snake")
+        self._output_service.open_window("Speed")
 
         while self._keep_playing:
             self._get_inputs()
@@ -59,8 +60,9 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        direction = self._input_service.get_direction()
-        self._snake.turn_head(direction)
+        self._buffer = Buffer(self._bufferstring)
+        #direction = self._input_service.get_direction()
+        #self._snake.turn_head(direction)
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -69,9 +71,16 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._snake.move()
-        self._handle_body_collision()
-        self._handle_food_collision()
+        words = ["cat", "bat", "word"]
+
+        self._bufferstring += self._input_service.get_letter()
+        bufferbool = self._buffer.match(words)
+        
+        if bufferbool:
+            self._bufferstring = ""
+        #self._snake.move()
+        #self._handle_body_collision()
+        #self._handle_food_collision()
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -82,8 +91,8 @@ class Director:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        self._output_service.draw_actor(self._food)
-        self._output_service.draw_actors(self._snake.get_all())
+        #self._output_service.draw_actor(self._food)
+        #self._output_service.draw_actors(self._snake.get_all())
         self._output_service.draw_actor(self._score_board)
         self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
