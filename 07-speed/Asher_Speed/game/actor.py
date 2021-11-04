@@ -87,8 +87,8 @@ class Actor:
         """
         x = self._position.get_x()
         y = self._position.get_y()
-        dx = self._velocity.get_x()
-        dy = self._velocity.get_y()
+        dx = - self._velocity.get_x()
+        dy = - self._velocity.get_y()
         x = (x + dx) % constants.MAX_X
         y = (y + dy) % constants.MAX_Y
 
