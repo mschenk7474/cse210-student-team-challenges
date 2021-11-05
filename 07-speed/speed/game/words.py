@@ -21,7 +21,7 @@ class Word():
         return self._words
 
     def get_word(self):
-        with open("game\words.txt", "r") as file:
+        with open("speed\game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         
@@ -51,7 +51,8 @@ class Word():
         """
         velocity = Point(-1, 0)
         y = random.randint(30, 340)
-        position = Point(500, y)
+        x = 500
+        position = Point(x, y)
         self._word = Actor()
         word = self.get_word()
         self._word.set_text(word)
@@ -60,6 +61,9 @@ class Word():
         self._words.append(self._word)
         self.string_word = word
         self.get_word_string()
+        # get_x = Point(x,y).get_x()
+        # if get_x == 0:
+        #     self.hit_wall()
 
         #create string list
         # self.string_word = self._word.get_text()
@@ -69,14 +73,14 @@ class Word():
         self.word_list.append(self.string_word)
         #return self._word_list
 
-    def hit_wall():
+    def hit_wall(self):
         """
         This determines if the word hits the "wall" meaning that it hit 
         0 on the X-axis.
 
         Needs to return true or false.
         """
-        pass
+        return True
 
     def _prepare_words(self):
         for i in range(0, 5):

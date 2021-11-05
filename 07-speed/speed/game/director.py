@@ -6,6 +6,7 @@ from game import constants
 from game.score_board import ScoreBoard
 from game.words import Word
 from game.buffer import Buffer
+from game.point import Point
 #from speed.game import buffer
 
 class Director:
@@ -74,7 +75,7 @@ class Director:
         self._buffer_2 = Buffer(self._bufferstring)
 
         
-        #self._ifending_x = self._word.move_next()
+        #self._ifending_x = self._word._add_word()
         self._word.move_word()
 
     def _do_updates(self):
@@ -86,12 +87,22 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        # if self._ifending_x == 0:
-        #     self._score_board.sub_points(50)
+
 
         self._bufferstring += self._input_service.get_letter()
-        
         bufferbool, x = self._buffer_2.match(self._word.word_list)
+
+        counting_neg_score = 0
+        if self._word.hit_wall():
+            word = self._word.word_list[x]
+            for let in word:
+                counting_neg_score += 1
+            self._score_board.sub_points(counting_neg_score)
+            
+            # remove_actor = self._word._words[x]
+            # self._word.word_list.remove(word)
+            # self._word._words.remove(remove_actor)
+
         counting_score = 0
         if bufferbool:
             word = self._word.word_list[x]
