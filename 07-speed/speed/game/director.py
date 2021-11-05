@@ -37,7 +37,7 @@ class Director:
         self._score_board = ScoreBoard()
         self._buffer_2 = None
         self._buffer = Buffer(self._bufferstring)
-        self._word_list = []
+        #self._word_string_list = [""]
         self._word = Word()
         self._ifending_x = 50
         
@@ -50,10 +50,9 @@ class Director:
         print("Starting game...")
         self._output_service.open_window("Speed")
 
-        for i in range(0, 5):
-            self._w = self._word.get_word()
-            self._word_list.append(self._w)
-        print(self._word_list)
+        self._word._prepare_words()
+        self._word.get_words()
+        print(self._word._word_list)
 
         while self._keep_playing:
             self._get_inputs()
@@ -74,9 +73,9 @@ class Director:
         """
         self._buffer_2 = Buffer(self._bufferstring)
 
-        self._word_list
         
-        self._ifending_x = self._word.move_next()
+        #self._ifending_x = self._word.move_next()
+        self._word.move_word()
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -87,26 +86,29 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        if self._ifending_x == 0:
-            self._score_board.sub_points(50)
+        # if self._ifending_x == 0:
+        #     self._score_board.sub_points(50)
 
         self._bufferstring += self._input_service.get_letter()
-        bufferbool, x = self._buffer_2.match(self._word_list)
+        
+        bufferbool, x = self._buffer_2.match(self._word._word_list)
         counting_score = 0
         if bufferbool:
-            word = self._word_list[x]
+            word = self._word._word_list[x]
             for let in word:
                 counting_score += 1
             self._score_board.add_points(counting_score)
-            self._word_list.pop(x)
+
+            remove_actor = self._word._words[x]
+            self._word._words.remove(remove_actor)
             
             self._bufferstring = ""
         
         random_range = random.randint(1,1500)
         if random_range <= 10:
-            self._w = self._word.get_word()
-            self._word_list.append(self._w)
-        print(self._word_list)
+            self._word._add_word()
+            self._word.get_words()
+        print(self._word._word_list)
         # #Variable declarations
         # words_to_remove = []
         # add_points_num = 0
@@ -155,8 +157,9 @@ class Director:
         """
         self._output_service.clear_screen()
         #self._output_service.draw_actors(self._word.display_all()) #New function that needs to be added
+        self._output_service.draw_actors(self._word.get_all())
         self._output_service.draw_actor(self._score_board)
-        self._output_service.draw_actor(self._word)
+        #self._output_service.draw_actor(self._word)
         self._output_service.draw_actor(self._buffer_2)
         self._output_service.flush_buffer()
 

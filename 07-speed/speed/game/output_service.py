@@ -90,7 +90,12 @@ class OutputService:
             actors (list): The actors to render.
         """ 
         for actor in actors:
-            self.draw_actor(actor)
+            #self.draw_actor(actor)
+            text = actor.get_text()
+            position = actor.get_position()
+            x = position.get_x()
+            y = position.get_y()
+            raylibpy.draw_text(text, x, y, 16, raylibpy.BLACK)
     
     def flush_buffer(self):
         """Renders the screen.

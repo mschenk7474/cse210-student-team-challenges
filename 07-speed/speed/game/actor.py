@@ -94,7 +94,7 @@ class Actor:
 
         position = Point(x, y)
         self._position = position
-        return x
+        #return x
     
     def set_position(self, position):
         """Updates the actor's position to the given one.
