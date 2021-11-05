@@ -20,7 +20,7 @@ class InputService:
         Args:
             self (InputService): An instance of InputService.
         """
-        self._current = Point(1, 0)
+        self._current = Point(-1, 0)
         
     def get_direction(self):
         """Gets the selected direction. If one hasn't been selected the last 

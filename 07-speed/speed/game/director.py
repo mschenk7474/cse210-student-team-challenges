@@ -39,6 +39,7 @@ class Director:
         self._buffer = Buffer(self._bufferstring)
         self._word_list = []
         self._word = Word()
+        self._ifending_x = 50
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -73,8 +74,9 @@ class Director:
         """
         self._buffer_2 = Buffer(self._bufferstring)
 
+        self._word_list
         
-        
+        self._ifending_x = self._word.move_next()
 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -85,6 +87,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        if self._ifending_x == 0:
+            self._score_board.sub_points(50)
 
         self._bufferstring += self._input_service.get_letter()
         bufferbool, x = self._buffer_2.match(self._word_list)
@@ -98,7 +102,7 @@ class Director:
             
             self._bufferstring = ""
         
-        random_range = random.randint(1,1000)
+        random_range = random.randint(1,1500)
         if random_range <= 10:
             self._w = self._word.get_word()
             self._word_list.append(self._w)

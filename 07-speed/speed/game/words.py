@@ -13,15 +13,16 @@ class Word(Actor):
 
         super().__init__()
         self._word = "George"
-        position = Point(50, 50)
+        y = random.randint(30, 340)
+        position = Point(500, y)
         self.set_position(position)
-        velocity = -1
+        velocity = Point(-1,0)
         self.set_velocity(velocity)
         self.set_text(f"Word: {self._word}")
 
 
     def get_word(self):
-        with open("speed\game\words.txt", "r") as file:
+        with open("game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         

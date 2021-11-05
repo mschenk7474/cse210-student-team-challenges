@@ -89,11 +89,12 @@ class Actor:
         y = self._position.get_y()
         dx = - self._velocity.get_x()
         dy = - self._velocity.get_y()
-        x = (x + dx) % constants.MAX_X
+        x = (x + dx) #% constants.MAX_X
         y = (y + dy) % constants.MAX_Y
 
         position = Point(x, y)
         self._position = position
+        return x
     
     def set_position(self, position):
         """Updates the actor's position to the given one.
