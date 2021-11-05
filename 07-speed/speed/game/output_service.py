@@ -34,7 +34,7 @@ class OutputService:
             self (OutputService): An instance of OutputService.
         """ 
         raylibpy.begin_drawing()
-        raylibpy.clear_background(raylibpy.BLACK) #Changed this from white
+        raylibpy.clear_background(raylibpy.WHITE) #Changed this from white
 
     def draw_box(self, x, y, width, height):
         """
@@ -49,7 +49,7 @@ class OutputService:
         color = raylibpy.WHITE
 
         if is_dark_text:
-            color = raylibpy.WHITE #Changed to white
+            color = raylibpy.BLACK #Changed to white
 
         raylibpy.draw_text(text,
             x + constants.DEFAULT_TEXT_OFFSET,

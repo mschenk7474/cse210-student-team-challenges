@@ -14,14 +14,14 @@ class Word():
         super().__init__()
         self._word = None
         self._words = []
-        self._prepare_words()
-        self._word_list = []
+        self.string_word = ""
+        self.word_list = []
 
     def get_all(self):
         return self._words
 
     def get_word(self):
-        with open("speed\game\words.txt", "r") as file:
+        with open("game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         
@@ -58,11 +58,15 @@ class Word():
         self._word.set_position(position)
         self._word.set_velocity(velocity)
         self._words.append(self._word)
+        self.string_word = word
+        self.get_word_string()
 
-    def get_words(self):
-        for word in self._words:
-            string_word = word.get_text()
-            self._word_list.append(string_word)
+        #create string list
+        # self.string_word = self._word.get_text()
+        # self.word_list.append(self.string_word)
+
+    def get_word_string(self):
+        self.word_list.append(self.string_word)
         #return self._word_list
 
     def hit_wall():

@@ -51,8 +51,8 @@ class Director:
         self._output_service.open_window("Speed")
 
         self._word._prepare_words()
-        self._word.get_words()
-        print(self._word._word_list)
+        #self._word.get_words()
+        print(self._word.word_list)
 
         while self._keep_playing:
             self._get_inputs()
@@ -91,24 +91,26 @@ class Director:
 
         self._bufferstring += self._input_service.get_letter()
         
-        bufferbool, x = self._buffer_2.match(self._word._word_list)
+        bufferbool, x = self._buffer_2.match(self._word.word_list)
         counting_score = 0
         if bufferbool:
-            word = self._word._word_list[x]
+            word = self._word.word_list[x]
             for let in word:
                 counting_score += 1
             self._score_board.add_points(counting_score)
 
             remove_actor = self._word._words[x]
+            self._word.word_list.remove(word)
             self._word._words.remove(remove_actor)
+
             
             self._bufferstring = ""
         
         random_range = random.randint(1,1500)
         if random_range <= 10:
             self._word._add_word()
-            self._word.get_words()
-        print(self._word._word_list)
+            #self._word.get_words()
+        print(self._word.word_list)
         # #Variable declarations
         # words_to_remove = []
         # add_points_num = 0
