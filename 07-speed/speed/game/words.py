@@ -50,14 +50,8 @@ class Word():
             velocity (Point): The segment's velocity.
         """
         velocity = Point(-1, 0)
-<<<<<<< Updated upstream
-        y = random.randint(30, 340)
-        x = 500
-        position = Point(x, y)
-=======
         y = random.randint(30,330)
         position = Point(600, y)
->>>>>>> Stashed changes
         self._word = Actor()
         word = self.get_word()
         self._word.set_text(word)
