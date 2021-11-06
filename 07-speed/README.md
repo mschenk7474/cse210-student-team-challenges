@@ -41,3 +41,7 @@ root                    (project root folder)
 ## Authors
 ---
 * # TODO: Add names and emails here
+* Mason Schenk & sch19013@byui.edu 
+* Asher Hanson & han16059@byui.edu 
+* Matthew Goodsell & goo15004@byui.edu 
+* Michael Hampton & mikeyhampy@byui.edu
