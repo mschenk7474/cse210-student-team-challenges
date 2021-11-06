@@ -21,7 +21,7 @@ class Word():
         return self._words
 
     def get_word(self):
-        with open("game\words.txt", "r") as file:
+        with open("speed\game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         
@@ -38,7 +38,6 @@ class Word():
         """
         for word in self._words:
             word.move_next()
-        #word.set_velocity(direction)
 
     def _add_word(self):
         """Adds a new segment to the snake using the given text, position and velocity.
@@ -60,17 +59,10 @@ class Word():
         self._words.append(self._word)
         self.string_word = word
         self.get_word_string()
-        # get_x = Point(x,y).get_x()
-        # if get_x == 0:
-        #     self.hit_wall()
 
-        #create string list
-        # self.string_word = self._word.get_text()
-        # self.word_list.append(self.string_word)
 
     def get_word_string(self):
         self.word_list.append(self.string_word)
-        #return self._word_list
 
     def hit_wall(self):
         """

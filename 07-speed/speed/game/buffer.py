@@ -28,4 +28,3 @@ class Buffer(Actor):
          return True, x - 1
       else:
          return False, x - 1
-   #if returns true, the word that's correct is word_list[x-1]

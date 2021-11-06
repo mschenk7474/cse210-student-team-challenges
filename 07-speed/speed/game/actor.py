@@ -90,7 +90,7 @@ class Actor:
         y = self._position.get_y()
         dx = self._velocity.get_x()
         dy = self._velocity.get_y()
-        x = (x + dx) #% constants.MAX_X
+        x = (x + dx)
         y = (y + dy) % constants.MAX_Y
 
         position = Point(x, y)

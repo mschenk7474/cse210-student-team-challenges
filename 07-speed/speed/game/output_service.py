@@ -34,7 +34,7 @@ class OutputService:
             self (OutputService): An instance of OutputService.
         """ 
         raylibpy.begin_drawing()
-        raylibpy.clear_background(raylibpy.WHITE) #Changed this from white
+        raylibpy.clear_background(raylibpy.BLACK) #Changed this from white
 
     def draw_box(self, x, y, width, height):
         """
@@ -49,7 +49,7 @@ class OutputService:
         color = raylibpy.WHITE
 
         if is_dark_text:
-            color = raylibpy.BLACK #Changed to white
+            color = raylibpy.WHITE #Changed to white
 
         raylibpy.draw_text(text,
             x + constants.DEFAULT_TEXT_OFFSET,
@@ -79,8 +79,7 @@ class OutputService:
         
         if text != "":
             self.draw_text(x, y, text, is_dark_text)
-        #self._screen.print_at(text, x, y, 7) # WHITE
-        #raylibpy.draw_text(text, x, y, 16, raylibpy.BLUE)
+
 
     def draw_actors(self, actors):
         """Renders the given list of actors on the screen.
@@ -90,12 +89,11 @@ class OutputService:
             actors (list): The actors to render.
         """ 
         for actor in actors:
-            #self.draw_actor(actor)
             text = actor.get_text()
             position = actor.get_position()
             x = position.get_x()
             y = position.get_y()
-            raylibpy.draw_text(text, x, y, 16, raylibpy.BLACK)
+            raylibpy.draw_text(text, x, y, 16, raylibpy.WHITE)
     
     def flush_buffer(self):
         """Renders the screen.

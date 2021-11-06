@@ -47,7 +47,6 @@ class Director:
         self._output_service.open_window("Speed")
 
         self._word._prepare_words()
-        print(self._word.word_list)
 
         while self._keep_playing:
             self._get_inputs()
@@ -95,19 +94,25 @@ class Director:
             self._word._words.remove(remove_actor)
             self._bufferstring = ""
 
-        counting_score = 0
+
+        position_list = []
         for i in range(len(self._word.word_list) - 1):
             temp_word_actor = self._word._words[i]
             if temp_word_actor._x < -7:
                 word_string = self._word.word_list[i]
+                counting_score = 0
                 for let in word_string:
                     counting_score += 1    
                 self._score_board.sub_points(counting_score)
-
-                remove_actor = self._word._words[i]
-                temp_word = self._word.word_list[i]
-                self._word.word_list.remove(temp_word)
-                self._word._words.remove(remove_actor)
+                position_list.append(i)
+        
+        forloopint = 0
+        for val in position_list:
+            remove_actor = self._word._words[val + forloopint]
+            temp_word = self._word.word_list[val + forloopint]
+            self._word.word_list.remove(temp_word)
+            self._word._words.remove(remove_actor)
+            forloopint -= 1
     
         #add more words the the program
         random_range = random.randint(1,1500)
@@ -115,45 +120,7 @@ class Director:
             self._word._add_word()
         elif len(self._word.word_list) < 1:
             self._word._add_word()
-        print(self._word.word_list)
-        # #Variable declarations
-        # words_to_remove = []
-        # add_points_num = 0
-        # sub_points_num = 0
-        # #If word is match and add points
-        # for word in self._word_list:
-        #     #Word match here
-        #     if word == self._buffer.match(self._word_list):
-        #         #Figure out how the addition per letter (1 per letter)
-        #         for let in word:
-        #             let = 1
-        #             let += 1
-        #             add_points_num = let
-        #         self._score_board.add_points(add_points_num)
-
-        #         #Append the word to the remove list
-        #         words_to_remove.append(word)
-
-        # #If word hits wall and sub points
-        #     if word == self._word.hit_wall(): #New Function
-        #         #Figure out subtraction per letter (-1 per letter)
-        #         for let in word:
-        #             let = 1
-        #             let += 1
-        #             let = -(let)
-        #             sub_points_num = let
-        #         self._score_board.sub_points(sub_points_num)
-        #         #Append the word to the remove list
-        #         words_to_remove.append(word)
-
-
-        # #Remove words
-        # for word in range(len(self._word_list)):
-        #     for words in range(len(words_to_remove)):
-        #         if word == words:
-        #             self._word_list.pop(word)
-
-
+        
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -163,10 +130,8 @@ class Director:
             self (Director): An instance of Director.
         """
         self._output_service.clear_screen()
-        #self._output_service.draw_actors(self._word.display_all()) #New function that needs to be added
         self._output_service.draw_actors(self._word.get_all())
         self._output_service.draw_actor(self._score_board)
-        #self._output_service.draw_actor(self._word)
         self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
 
