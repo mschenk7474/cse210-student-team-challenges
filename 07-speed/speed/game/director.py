@@ -6,8 +6,6 @@ from game import constants
 from game.score_board import ScoreBoard
 from game.words import Word
 from game.buffer import Buffer
-from game.point import Point
-#from speed.game import buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -36,11 +34,8 @@ class Director:
         self._keep_playing = True
         self._output_service = output_service
         self._score_board = ScoreBoard()
-        self._buffer_2 = None
-        self._buffer = Buffer(self._bufferstring)
-        #self._word_string_list = [""]
+        self._buffer = None
         self._word = Word()
-        self._ifending_x = 50
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -52,7 +47,6 @@ class Director:
         self._output_service.open_window("Speed")
 
         self._word._prepare_words()
-        #self._word.get_words()
         print(self._word.word_list)
 
         while self._keep_playing:
@@ -72,10 +66,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._buffer_2 = Buffer(self._bufferstring)
-
-        
-        #self._ifending_x = self._word._add_word()
+        self._buffer = Buffer(self._bufferstring)
         self._word.move_word()
 
     def _do_updates(self):
@@ -88,21 +79,10 @@ class Director:
             self (Director): An instance of Director.
         """
 
-
         self._bufferstring += self._input_service.get_letter()
-        bufferbool, x = self._buffer_2.match(self._word.word_list)
 
-        counting_neg_score = 0
-        if self._word.hit_wall():
-            word = self._word.word_list[x]
-            for let in word:
-                counting_neg_score += 1
-            self._score_board.sub_points(counting_neg_score)
-            
-            # remove_actor = self._word._words[x]
-            # self._word.word_list.remove(word)
-            # self._word._words.remove(remove_actor)
-
+        # add point for right answer
+        bufferbool, x = self._buffer.match(self._word.word_list)
         counting_score = 0
         if bufferbool:
             word = self._word.word_list[x]
@@ -113,14 +93,28 @@ class Director:
             remove_actor = self._word._words[x]
             self._word.word_list.remove(word)
             self._word._words.remove(remove_actor)
-
-            
             self._bufferstring = ""
-        
+
+        counting_score = 0
+        for i in range(len(self._word.word_list) - 1):
+            temp_word_actor = self._word._words[i]
+            if temp_word_actor._x < -7:
+                word_string = self._word.word_list[i]
+                for let in word_string:
+                    counting_score += 1    
+                self._score_board.sub_points(counting_score)
+
+                remove_actor = self._word._words[i]
+                temp_word = self._word.word_list[i]
+                self._word.word_list.remove(temp_word)
+                self._word._words.remove(remove_actor)
+    
+        #add more words the the program
         random_range = random.randint(1,1500)
         if random_range <= 10:
             self._word._add_word()
-            #self._word.get_words()
+        elif len(self._word.word_list) < 1:
+            self._word._add_word()
         print(self._word.word_list)
         # #Variable declarations
         # words_to_remove = []
@@ -173,6 +167,6 @@ class Director:
         self._output_service.draw_actors(self._word.get_all())
         self._output_service.draw_actor(self._score_board)
         #self._output_service.draw_actor(self._word)
-        self._output_service.draw_actor(self._buffer_2)
+        self._output_service.draw_actor(self._buffer)
         self._output_service.flush_buffer()
 

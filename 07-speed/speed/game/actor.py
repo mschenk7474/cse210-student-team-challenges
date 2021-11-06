@@ -28,6 +28,7 @@ class Actor:
         self._velocity = Point(0, 0)
         self._width = 0
         self._height = 0
+        self._x = 50
 
     def get_width(self):
         return self._width
@@ -94,7 +95,7 @@ class Actor:
 
         position = Point(x, y)
         self._position = position
-        #return x
+        self._x = x
     
     def set_position(self, position):
         """Updates the actor's position to the given one.
