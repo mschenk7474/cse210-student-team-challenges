@@ -1,5 +1,5 @@
 import os
-os.environ['RAYLIB_BIN_PATH'] = r'speed\libraylib_shared.dll'
+os.environ['RAYLIB_BIN_PATH'] = r'../07-speed/speed'
 
 from game.director import Director
 from game.input_service import InputService
