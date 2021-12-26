@@ -1,5 +1,5 @@
 import os
-os.environ['RAYLIB_BIN_PATH'] = r'../07-speed/speed'
+os.environ['RAYLIB_BIN_PATH'] = r'cse210-student-team-challenges\07-speed\raylib-2.0.0-Win64-mingw\lib'
 
 from game.director import Director
 from game.input_service import InputService

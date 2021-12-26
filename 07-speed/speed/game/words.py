@@ -21,7 +21,7 @@ class Word():
         return self._words
 
     def get_word(self):
-        with open("speed\game\words.txt", "r") as file:
+        with open("cse210-student-team-challenges\\07-speed\speed\game\words.txt", "r") as file:
             allText = file.read()
             words = list(map(str, allText.split()))
         
